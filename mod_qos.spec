@@ -3,7 +3,7 @@
 
 Name:           mod_qos
 Version:        10.13
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Quality of service module for Apache
 
 Group:          System Environment/Daemons
@@ -13,7 +13,9 @@ Source0:        http://downloads.sourceforge.net/project/mod-qos/%{name}-%{versi
 Source1:        mod_qos.conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  httpd-devel pcre-devel openssl-devel
+BuildRequires:  httpd-devel >= 2.0.0 
+BuildRequires:	pcre-devel 
+BuildRequires:	openssl-devel
 Requires:       httpd-mmn = %{_httpd_mmn}
 
 %description
@@ -56,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jan  8 2013 Christof Damian <christof@damian.net> - 10.13-3
+- update build requires
+
 * Tue Jan  8 2013 Christof Damian <christof@damian.net> - 10.13-2
 - add conf file
 
