@@ -3,13 +3,14 @@
 
 Name:           mod_qos
 Version:        10.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Quality of service module for Apache
 
 Group:          System Environment/Daemons
 License:        GPLv2
 URL:            http://opensource.adnovum.ch/mod_qos/
 Source0:        http://downloads.sourceforge.net/project/mod-qos/%{name}-%{version}.tar.gz
+Source1:        mod_qos.conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  httpd-devel pcre-devel openssl-devel
@@ -40,6 +41,8 @@ TCP connections.
 rm -rf $RPM_BUILD_ROOT
 install -Dpm 755 apache2/.libs/mod_qos.so \
     $RPM_BUILD_ROOT%{_libdir}/httpd/modules/mod_qos.so
+install -Dpm 644 %{SOURCE1} \
+    $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/mod_qos.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -49,9 +52,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc doc README.TXT
 %{_libdir}/httpd/modules/mod_qos.so
+%config(noreplace) %{_sysconfdir}/httpd/conf.d/mod_qos.conf
 
 
 %changelog
+* Tue Jan  8 2013 Christof Damian <christof@damian.net> - 10.13-2
+- add conf file
+
 * Tue Jan  8 2013 Christof Damian <christof@damian.net> - 10.13-1
 - initial package
 
