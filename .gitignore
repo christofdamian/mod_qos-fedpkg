@@ -1,0 +1,6 @@
+/mod_qos-10.13.tar.gz
+*~
+/x86_64/
+/mod_qos-*/
+*.rpm
+*.log
