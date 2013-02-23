@@ -3,7 +3,7 @@
 
 Name:           mod_qos
 Version:        10.13
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Quality of service module for Apache
 
 Group:          System Environment/Daemons
@@ -14,8 +14,8 @@ Source1:        mod_qos.conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  httpd-devel >= 2.0.0 
-BuildRequires:	pcre-devel 
-BuildRequires:	openssl-devel
+BuildRequires:  pcre-devel 
+BuildRequires:  openssl-devel
 Requires:       httpd-mmn = %{_httpd_mmn}
 
 %description
@@ -36,8 +36,7 @@ TCP connections.
 %setup -q -n %{name}-%{version}
 
 %build
-%{_httpd_apxs} -Wc,"%{optflags}" -c apache2/mod_qos.c
-
+%{_httpd_apxs} -Wc,"%{optflags}" -c apache2/mod_qos.c -lcrypto -lpcre
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -58,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Feb 23 2013 Christof Damian <christof@damian.net> - 10.13-4
+- add crypto requirement
+
 * Tue Jan  8 2013 Christof Damian <christof@damian.net> - 10.13-3
 - update build requires
 
